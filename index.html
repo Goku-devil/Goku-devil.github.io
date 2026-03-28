@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goku | Software Developer</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="styl.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">Goku<span>.</span></a>
+
+            <ul class="nav-links">
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero section">
+        <div class="container hero-content">
+            <div class="hero-text fade-in">
+                <p class="greeting">Hi, my name is</p>
+                <h1 class="name">Gokulraj A S</h1>
+                <h2 class="role">I'm a <span class="typewriter"></span><span class="cursor">|</span></h2>
+                <p class="summary">I'm a software developer passionate about creating premium, dynamic user experiences
+                    and scalable digital products.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in-delay">
+                <div class="image-wrapper">
+                    <!-- Placeholder for profile image -> using an aesthetic gradient shape instead -->
+                    <div class="gradient-shape"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container section-content">
+            <h2 class="section-title reveal">About Me</h2>
+            <div class="about-grid reveal">
+                <div class="about-text">
+                    <p>Hello! I'm Goku, a passionate developer who enjoys creating beautiful and functional things that
+                        live on the internet. My interest in web development started back in the day when I decided to
+                        try editing custom Tumblr themes, turning it into a full-fledged career chasing highly
+                        interactive designs.</p>
+                    <p>Fast-forward to today, and I've had the privilege of working at an advertising agency, a
+                        start-up, and a huge corporation. My main focus these days is building accessible, inclusive
+                        products and digital experiences.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;">Let's Talk</a>
+                </div>
+                <div class="about-stats glass-card">
+                    <div class="stat">
+                        <h3>3+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat">
+                        <h3>20+</h3>
+                        <p>Projects Completed</p>
+                    </div>
+                    <div class="stat">
+                        <h3>5</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="container section-content">
+            <h2 class="section-title reveal">My Skills</h2>
+            <div class="skills-grid reveal">
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-js"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-react"></i>
+                    <span>React JS</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-node-js"></i>
+                    <span>Node.js</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-git-alt"></i>
+                    <span>Git</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-brands fa-figma"></i>
+                    <span>Figma</span>
+                </div>
+                <div class="skill-card glass-card">
+                    <i class="fa-solid fa-paintbrush"></i>
+                    <span>Tailwind CSS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section">
+        <div class="container section-content">
+            <h2 class="section-title reveal">Featured Projects</h2>
+            <div class="projects-grid reveal">
+                <!-- Project 1 -->
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-img img-1"></div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <i class="fa-regular fa-folder project-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub Link"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" aria-label="External Link"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">E-Commerce Dashboard</h3>
+                        <p class="project-desc">A modern, responsive dashboard for managing e-commerce sales, inventory,
+                            and users with real-time analytics.</p>
+                        <ul class="project-tech">
+                            <li>React</li>
+                            <li>Node.js</li>
+                            <li>CSS Grid</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-img img-2"></div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <i class="fa-regular fa-folder project-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub Link"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" aria-label="External Link"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">AI Content Generator</h3>
+                        <p class="project-desc">A web application leveraging OpenAI's API to generate marketing copy and
+                            blog posts instantaneously.</p>
+                        <ul class="project-tech">
+                            <li>Next.js</li>
+                            <li>Tailwind</li>
+                            <li>OpenAI API</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-img img-3"></div>
+                    <div class="project-info">
+                        <div class="project-header">
+                            <i class="fa-regular fa-folder project-icon"></i>
+                            <div class="project-links">
+                                <a href="#" aria-label="GitHub Link"><i class="fa-brands fa-github"></i></a>
+                                <a href="#" aria-label="External Link"><i
+                                        class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                            </div>
+                        </div>
+                        <h3 class="project-title">Weather App</h3>
+                        <p class="project-desc">A beautiful, minimalistic weather application providing current and
+                            7-day forecasts with dynamic backgrounds.</p>
+                        <ul class="project-tech">
+                            <li>JavaScript</li>
+                            <li>Weather API</li>
+                            <li>CSS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container section-content reveal">
+            <h2 class="section-title text-center">Get In Touch</h2>
+            <p class="contact-subtitle">Although I'm not currently looking for any new opportunities, my inbox is always
+                open. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+            <a href="mailto:hello@example.com" class="btn btn-primary btn-large">Say Hello</a>
+
+            <div class="social-links">
+                <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" aria-label="Codepen"><i class="fa-brands fa-codepen"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Designed & Built by Goku</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
