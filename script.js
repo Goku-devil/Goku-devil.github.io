@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Print command
                 const cmdNode = document.createElement('p');
-                cmdNode.innerHTML = `<span class="prompt">goku@portfolio:${currentPath}$</span> ${commandLine}`;
+                cmdNode.innerHTML = `<span class="prompt"><span class="term-user">goku@portfolio</span>:<span class="term-path">${currentPath}</span>$</span> <span class="term-cmd">${commandLine}</span>`;
                 terminalOutput.appendChild(cmdNode);
 
                 if (commandLine) {
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (keys.length > 0) {
                             response = keys.map(k => {
                                 const isDir = currentDirObj.children[k].type === "dir";
-                                return isDir ? `<span style="color:var(--accent-1);font-weight:bold;">${k}/</span>` : k;
+                                return isDir ? `<span class="term-dir">${k}/</span>` : k;
                             }).join("&nbsp;&nbsp;&nbsp;&nbsp;");
                         }
                     }
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             response = `<span class="error">cd: ${targetDir}: No such file or directory</span>`;
                         }
                     }
-                    terminalPrompt.textContent = `goku@portfolio:${currentPath}$`;
+                    terminalPrompt.innerHTML = `<span class="term-user">goku@portfolio</span>:<span class="term-path">${currentPath}</span>$`;
                     break;
                 case 'cat':
                     const targetFile = args[1];
@@ -320,6 +320,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 resNode.innerHTML = response;
                 terminalOutput.appendChild(resNode);
             }
+        }
+        
+        // Mobile Terminal Popup Window Logic
+        const mobileTerminalBtn = document.getElementById('mobile-terminal-btn');
+        const terminalWrapper = document.querySelector('.terminal-wrapper');
+        const closeBtn = document.querySelector('.terminal-dot.close');
+        
+        if (mobileTerminalBtn && terminalWrapper) {
+            const originalParent = terminalWrapper.parentElement;
+            
+            const closeTerminal = (e) => {
+                if (e) e.stopPropagation();
+                terminalWrapper.classList.remove('visible-on-mobile');
+                // Return it back to the original layout flexbox tree
+                setTimeout(() => {
+                    if (!terminalWrapper.classList.contains('visible-on-mobile')) {
+                        originalParent.appendChild(terminalWrapper);
+                    }
+                }, 400); 
+            };
+            
+            mobileTerminalBtn.addEventListener('click', () => {
+                // Break out of all CSS stacking contexts by appending to body
+                document.body.appendChild(terminalWrapper); 
+                terminalWrapper.classList.add('visible-on-mobile');
+                setTimeout(() => terminalInput.focus(), 100);
+            });
+
+            // Close when clicking the red dot in the terminal header
+            if(closeBtn) {
+                closeBtn.style.cursor = 'pointer';
+                closeBtn.addEventListener('click', closeTerminal);
+            }
+
+            // Close when clicking the backdrop wrapper outside the terminal
+            terminalWrapper.addEventListener('click', (e) => {
+                if (e.target === terminalWrapper && terminalWrapper.classList.contains('visible-on-mobile')) {
+                    closeTerminal();
+                }
+            });
         }
     }
 });
