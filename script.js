@@ -365,4 +365,42 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    /* =========================================
+       DIRECTION-AWARE SKILL CARD FLIP
+       ========================================= */
+    const skillCards = document.querySelectorAll('.skill-card');
+
+    skillCards.forEach(card => {
+        card.addEventListener('mouseenter', function(e) {
+            const rect = card.getBoundingClientRect();
+            const w = rect.width;
+            const h = rect.height;
+            
+            // Calculate mouse position relative to center of element
+            const x = (e.clientX - rect.left - (w / 2)) * (w > h ? (h / w) : 1);
+            const y = (e.clientY - rect.top - (h / 2)) * (h > w ? (w / h) : 1);
+            
+            // Calculate direction (0: top, 1: right, 2: bottom, 3: left)
+            const direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+            
+            // Remove previous direction classes
+            card.classList.remove('dir-top', 'dir-right', 'dir-bottom', 'dir-left');
+            
+            // Add new direction class
+            if (direction === 0) card.classList.add('dir-top');
+            else if (direction === 1) card.classList.add('dir-right');
+            else if (direction === 2) card.classList.add('dir-bottom');
+            else if (direction === 3) card.classList.add('dir-left');
+            
+            // Add hover state class
+            card.classList.add('is-hovered');
+        });
+
+        card.addEventListener('mouseleave', function(e) {
+            // Remove hover state to trigger un-flip
+            card.classList.remove('is-hovered');
+        });
+    });
+
 });

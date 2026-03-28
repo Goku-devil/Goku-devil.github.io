@@ -612,9 +612,11 @@ img {
     transform-style: preserve-3d;
 }
 
-.skill-card:hover .skill-card-inner {
-    transform: rotateY(180deg);
-}
+/* Direction-aware inner flips */
+.skill-card.is-hovered.dir-top .skill-card-inner { transform: rotateX(-180deg); }
+.skill-card.is-hovered.dir-bottom .skill-card-inner { transform: rotateX(180deg); }
+.skill-card.is-hovered.dir-right .skill-card-inner { transform: rotateY(-180deg); }
+.skill-card.is-hovered.dir-left .skill-card-inner { transform: rotateY(180deg); }
 
 .skill-card-front,
 .skill-card-back {
@@ -644,9 +646,19 @@ img {
 }
 
 .skill-card-back {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg); /* Default fallback */
     border: 1px solid var(--accent-1);
     background: var(--surface-color);
+}
+
+/* Ensure the back face is oriented correctly relative to the flip axis */
+.skill-card.dir-top .skill-card-back,
+.skill-card.dir-bottom .skill-card-back {
+    transform: rotateX(180deg);
+}
+.skill-card.dir-left .skill-card-back,
+.skill-card.dir-right .skill-card-back {
+    transform: rotateY(180deg);
 }
 
 .skill-card-back p {
