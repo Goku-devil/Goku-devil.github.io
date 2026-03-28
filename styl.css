@@ -420,6 +420,7 @@ img {
     flex-direction: column;
     overflow: hidden;
     font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    cursor: pointer;
 }
 
 .terminal-header {
