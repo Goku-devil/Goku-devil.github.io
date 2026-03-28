@@ -61,9 +61,27 @@
                 </div>
             </div>
             <div class="hero-image fade-in-delay">
-                <div class="image-wrapper">
-                    <!-- Placeholder for profile image -> using an aesthetic gradient shape instead -->
-                    <div class="gradient-shape"></div>
+                <div class="terminal-wrapper">
+                    <div class="terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <span class="terminal-dot close"></span>
+                                <span class="terminal-dot minimize"></span>
+                                <span class="terminal-dot maximize"></span>
+                            </div>
+                            <div class="terminal-title">goku@portfolio:~</div>
+                        </div>
+                        <div class="terminal-body" id="terminal-body">
+                            <div class="terminal-output" id="terminal-output">
+                                <p>Welcome to Goku's Interactive Portfolio Terminal (v1.0.0)</p>
+                                <p>Type <span class="highlight">help</span> to see available commands.</p>
+                            </div>
+                            <div class="terminal-input-line">
+                                <span class="prompt" id="terminal-prompt">goku@portfolio:~$</span>
+                                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
