@@ -66,6 +66,16 @@
     scroll-behavior: smooth;
 }
 
+::selection {
+    background: #58cc69;
+    color: #ffffff;
+}
+
+::-moz-selection {
+    background: #58cc69;
+    color: #ffffff;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
@@ -73,6 +83,16 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: background-color 0.4s ease, color 0.4s ease;
+    user-select: none;
+    /* Disable text selection globally */
+    -webkit-user-select: none;
+}
+
+#about,
+#about * {
+    user-select: text;
+    /* Re-enable selection for the about section */
+    -webkit-user-select: text;
 }
 
 h1,
@@ -425,9 +445,20 @@ img {
     border-radius: 50%;
 }
 
-.terminal-dot.close { background-color: var(--text-secondary); opacity: 0.5; }
-.terminal-dot.minimize { background-color: var(--text-secondary); opacity: 0.5; }
-.terminal-dot.maximize { background-color: var(--text-secondary); opacity: 0.5; }
+.terminal-dot.close {
+    background-color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.terminal-dot.minimize {
+    background-color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+.terminal-dot.maximize {
+    background-color: var(--text-secondary);
+    opacity: 0.5;
+}
 
 .terminal-title {
     position: absolute;
@@ -455,6 +486,7 @@ img {
 .terminal-body::-webkit-scrollbar {
     width: 6px;
 }
+
 .terminal-body::-webkit-scrollbar-thumb {
     background-color: var(--border-color);
     border-radius: 3px;
@@ -489,11 +521,14 @@ img {
 }
 
 .term-user {
-    color: #27c93f; /* Terminal Green */
+    color: #27c93f;
+    /* Terminal Green */
 }
 
-.term-path, .term-dir {
-    color: #3b82f6; /* Terminal Blue */
+.term-path,
+.term-dir {
+    color: #3b82f6;
+    /* Terminal Blue */
 }
 
 .term-cmd {
@@ -580,7 +615,8 @@ img {
     transform: rotateY(180deg);
 }
 
-.skill-card-front, .skill-card-back {
+.skill-card-front,
+.skill-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -902,7 +938,8 @@ footer p {
    ========================================= */
 .typewriter {
     font-family: monospace;
-    color: var(--accent-1);
+    color: #27c93f;
+    /* Terminal Green */
     font-size: 2.4rem;
 }
 
@@ -914,7 +951,8 @@ footer p {
 
 .cursor {
     display: inline-block;
-    color: var(--accent-1);
+    color: #27c93f;
+    /* Terminal Green */
     font-size: 2.4rem;
     font-weight: 300;
     vertical-align: middle;
@@ -956,7 +994,7 @@ footer p {
         display: inline-flex;
         margin-top: 1rem;
     }
-    
+
     .terminal-wrapper:not(.visible-on-mobile) {
         display: none !important;
     }
@@ -978,22 +1016,23 @@ footer p {
         justify-content: center;
         animation: fadeIn 0.3s ease forwards;
     }
-    
+
     .terminal-wrapper.visible-on-mobile .terminal {
         width: 100%;
         height: auto;
         max-height: 85vh;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
-    
+
     /* Fix containing block trapping for fixed position */
     .hero-image {
         transform: none !important;
         animation: none !important;
         transition: none !important;
     }
-    
+
     .hero-cta {
-        flex-wrap: wrap; /* Ensure buttons don't overlap */
+        flex-wrap: wrap;
+        /* Ensure buttons don't overlap */
     }
 }
