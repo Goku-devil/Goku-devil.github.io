@@ -242,7 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             switch (command) {
                 case 'help':
-                    response = "Available: <br>ls &nbsp;&nbsp;&nbsp;&nbsp;- list directory contents<br>cd &nbsp;&nbsp;&nbsp;&nbsp;- change directory<br>cat &nbsp;&nbsp;&nbsp;- print file contents<br>clear &nbsp;- clear terminal output<br>whoami - print current user<br>about &nbsp;- print developer info";
+                    response = "Available: <br>ls &nbsp;&nbsp;&nbsp;&nbsp;- list directory contents<br>cd &nbsp;&nbsp;&nbsp;&nbsp;- change directory<br>cat &nbsp;&nbsp;&nbsp;- print file contents<br>clear &nbsp;- clear terminal output<br>whoami - print current user<br>about &nbsp;- print developer info<br>distros - list favorite linux distros";
+                    break;
+                case 'distros':
+                    response = "- Kali Linux<br>- Ubuntu<br>- Garuda Linux<br>- Zorin OS<br>- Pop!_OS";
                     break;
                 case 'about':
                     response = `<pre style="line-height: 1.2; font-family: inherit; color: var(--text-primary); margin: 0.5rem 0; font-weight: bold;">  ____  ___  _  ___   _ 

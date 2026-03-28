@@ -751,11 +751,11 @@ img {
 }
 
 .social-links a:hover {
-    color: #fff;
+    color: var(--bg-color) !important;
     background: var(--accent-1);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.1);
     border-color: var(--accent-1);
-    box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+    box-shadow: 0 12px 25px var(--shadow-color);
 }
 
 /* =========================================
