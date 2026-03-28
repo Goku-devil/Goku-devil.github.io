@@ -4,7 +4,7 @@
 :root {
     /* Fonts */
     --font-main: 'Outfit', sans-serif;
-    
+
     /* Base spacing */
     --max-width: 1100px;
     --nav-height: 80px;
@@ -21,12 +21,14 @@
     --text-primary: #000000;
     --text-secondary: #555555;
     --border-color: rgba(0, 0, 0, 0.1);
-    
+
     /* Accents - Minimalist Black */
-    --accent-1: #000000; /* Black */
-    --accent-2: #333333; /* Dark Gray */
+    --accent-1: #000000;
+    /* Black */
+    --accent-2: #333333;
+    /* Dark Gray */
     --primary-gradient: var(--accent-1);
-    
+
     --shadow-color: rgba(0, 0, 0, 0.05);
     --glass-border: rgba(0, 0, 0, 0.1);
     --glass-highlight: rgba(255, 255, 255, 0.9);
@@ -34,18 +36,21 @@
 
 /* Dark Theme Variables (Default) */
 :root[data-theme="dark"] {
-    --bg-color: #000000; /* Pure Black */
+    --bg-color: #000000;
+    /* Pure Black */
     --surface-color: rgba(20, 20, 20, 0.8);
     --surface-solid: #111111;
     --text-primary: #ffffff;
     --text-secondary: #aaaaaa;
     --border-color: rgba(255, 255, 255, 0.15);
-    
+
     /* Accents - Minimalist White */
-    --accent-1: #ffffff; /* White against black */
-    --accent-2: #cccccc; /* Light gray */
+    --accent-1: #ffffff;
+    /* White against black */
+    --accent-2: #cccccc;
+    /* Light gray */
     --primary-gradient: var(--accent-1);
-    
+
     --shadow-color: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.05);
     --glass-highlight: rgba(255, 255, 255, 0.05);
@@ -70,7 +75,12 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--text-primary);
     font-weight: 800;
     line-height: 1.2;
@@ -390,7 +400,8 @@ img {
 }
 
 .gradient-shape::after {
-    content: '\f007'; /* FontAwesome user icon */
+    content: '\f007';
+    /* FontAwesome user icon */
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     font-size: 8rem;
@@ -438,39 +449,74 @@ img {
    SKILLS SECTION
    ========================================= */
 .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    padding: 1rem 0;
 }
 
 .skill-card {
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    transition: var(--transition);
+    flex: 0 1 calc(33.333% - 2rem);
+    min-width: 220px;
+    height: 250px;
+    perspective: 1000px;
     cursor: default;
 }
 
-.skill-card i {
-    font-size: 3.5rem;
+.skill-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.skill-card:hover .skill-card-inner {
+    transform: rotateY(180deg);
+}
+
+.skill-card-front, .skill-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+.skill-card-front i {
+    font-size: 4rem;
     color: var(--accent-1);
-    transition: var(--transition);
+    margin-bottom: 1rem;
+    transition: transform 0.3s;
 }
 
-.skill-card span {
+.skill-card-front span {
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
-.skill-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--accent-1);
-    box-shadow: 0 15px 35px var(--shadow-color);
+.skill-card-back {
+    transform: rotateY(180deg);
+    border: 1px solid var(--accent-1);
+    background: var(--surface-color);
 }
 
-.skill-card:hover i {
+.skill-card-back p {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.skill-card:hover .skill-card-front i {
     transform: scale(1.1);
 }
 
@@ -485,7 +531,7 @@ img {
 
 .project-card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     overflow: hidden;
     transition: var(--transition);
     position: relative;
@@ -499,7 +545,10 @@ img {
 .project-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 4px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
     background: var(--primary-gradient);
     opacity: 0;
     transition: var(--transition);
@@ -642,6 +691,7 @@ footer p {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -668,18 +718,22 @@ footer p {
         text-align: center;
         padding-top: 2rem;
     }
+
     .hero-text {
         align-items: center;
         display: flex;
         flex-direction: column;
     }
+
     .hero-cta {
         justify-content: center;
     }
+
     .image-wrapper {
         width: 300px;
         height: 300px;
     }
+
     .about-grid {
         grid-template-columns: 1fr;
     }
@@ -690,7 +744,7 @@ footer p {
         display: flex;
         z-index: 1001;
     }
-    
+
     .nav-links {
         position: fixed;
         top: 0;
@@ -714,25 +768,27 @@ footer p {
     .nav-link {
         font-size: 1.5rem;
     }
-    
+
     .hamburger.toggle span:nth-child(1) {
         transform: rotate(-45deg) translate(-5px, 6px);
     }
+
     .hamburger.toggle span:nth-child(2) {
         opacity: 0;
     }
+
     .hamburger.toggle span:nth-child(3) {
         transform: rotate(45deg) translate(-5px, -6px);
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
+
     .name {
         font-size: 3rem;
     }
-    
+
     .role {
         font-size: 1.8rem;
     }
@@ -774,6 +830,13 @@ footer p {
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
