@@ -242,7 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             switch (command) {
                 case 'help':
-                    response = "Available: <br>ls &nbsp;&nbsp;&nbsp;&nbsp;- list directory contents<br>cd &nbsp;&nbsp;&nbsp;&nbsp;- change directory<br>cat &nbsp;&nbsp;&nbsp;- print file contents<br>clear &nbsp;- clear terminal output<br>whoami - print current user";
+                    response = "Available: <br>ls &nbsp;&nbsp;&nbsp;&nbsp;- list directory contents<br>cd &nbsp;&nbsp;&nbsp;&nbsp;- change directory<br>cat &nbsp;&nbsp;&nbsp;- print file contents<br>clear &nbsp;- clear terminal output<br>whoami - print current user<br>about &nbsp;- print developer info";
+                    break;
+                case 'about':
+                    response = `<pre style="line-height: 1.2; font-family: inherit; color: var(--text-primary); margin: 0.5rem 0; font-weight: bold;">  ____  ___  _  ___   _ 
+ / ___|/ _ \\| |/ / | | |
+| |  _| | | | ' /| | | |
+| |_| | |_| | . \\| |_| |
+ \\____|\\___/|_|\\_\\\\___/ </pre>Hi, I'm Goku! A web developer passionate about creating premium, dynamic user experiences.`;
                     break;
                 case 'whoami':
                     response = "goku";
