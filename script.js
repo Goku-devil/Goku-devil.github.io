@@ -214,11 +214,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return current;
         }
 
-        terminalInput.addEventListener('keydown', function(event) {
+        terminalInput.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 const commandLine = this.value.trim();
                 this.value = '';
-                
+
                 // Print command
                 const cmdNode = document.createElement('p');
                 cmdNode.innerHTML = `<span class="prompt"><span class="term-user">goku@portfolio</span>:<span class="term-path">${currentPath}</span>$</span> <span class="term-cmd">${commandLine}</span>`;
@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (commandLine) {
                     processCommand(commandLine);
                 }
-                
+
                 // Scroll to bottom
                 terminalBodyWrapper.scrollTop = terminalBodyWrapper.scrollHeight;
             }
@@ -252,10 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
  / ___|/ _ \\| |/ / | | |
 | |  _| | | | ' /| | | |
 | |_| | |_| | . \\| |_| |
- \\____|\\___/|_|\\_\\\\___/ </pre>Hi, I'm Goku! A web developer passionate about creating premium, dynamic user experiences.`;
+ \\____|\\___/|_|\\_\\\\___/ </pre>Hi, I'm Gokulraj A S! A web developer passionate about creating premium, dynamic user experiences.`;
                     break;
                 case 'whoami':
-                    response = "goku";
+                    response = "I'm a web developer passionate about creating premium, dynamic user experiences.";
                     break;
                 case 'clear':
                     terminalOutput.innerHTML = '';
@@ -324,15 +324,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 terminalOutput.appendChild(resNode);
             }
         }
-        
+
         // Mobile Terminal Popup Window Logic
         const mobileTerminalBtn = document.getElementById('mobile-terminal-btn');
         const terminalWrapper = document.querySelector('.terminal-wrapper');
         const closeBtn = document.querySelector('.terminal-dot.close');
-        
+
         if (mobileTerminalBtn && terminalWrapper) {
             const originalParent = terminalWrapper.parentElement;
-            
+
             const closeTerminal = (e) => {
                 if (e) e.stopPropagation();
                 terminalWrapper.classList.remove('visible-on-mobile');
@@ -341,18 +341,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!terminalWrapper.classList.contains('visible-on-mobile')) {
                         originalParent.appendChild(terminalWrapper);
                     }
-                }, 400); 
+                }, 400);
             };
-            
+
             mobileTerminalBtn.addEventListener('click', () => {
                 // Break out of all CSS stacking contexts by appending to body
-                document.body.appendChild(terminalWrapper); 
+                document.body.appendChild(terminalWrapper);
                 terminalWrapper.classList.add('visible-on-mobile');
                 setTimeout(() => terminalInput.focus(), 100);
             });
 
             // Close when clicking the red dot in the terminal header
-            if(closeBtn) {
+            if (closeBtn) {
                 closeBtn.style.cursor = 'pointer';
                 closeBtn.addEventListener('click', closeTerminal);
             }
@@ -372,32 +372,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const skillCards = document.querySelectorAll('.skill-card');
 
     skillCards.forEach(card => {
-        card.addEventListener('mouseenter', function(e) {
+        card.addEventListener('mouseenter', function (e) {
             const rect = card.getBoundingClientRect();
             const w = rect.width;
             const h = rect.height;
-            
+
             // Calculate mouse position relative to center of element
             const x = (e.clientX - rect.left - (w / 2)) * (w > h ? (h / w) : 1);
             const y = (e.clientY - rect.top - (h / 2)) * (h > w ? (w / h) : 1);
-            
+
             // Calculate direction (0: top, 1: right, 2: bottom, 3: left)
             const direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
-            
+
             // Remove previous direction classes
             card.classList.remove('dir-top', 'dir-right', 'dir-bottom', 'dir-left');
-            
+
             // Add new direction class
             if (direction === 0) card.classList.add('dir-top');
             else if (direction === 1) card.classList.add('dir-right');
             else if (direction === 2) card.classList.add('dir-bottom');
             else if (direction === 3) card.classList.add('dir-left');
-            
+
             // Add hover state class
             card.classList.add('is-hovered');
         });
 
-        card.addEventListener('mouseleave', function(e) {
+        card.addEventListener('mouseleave', function (e) {
             // Remove hover state to trigger un-flip
             card.classList.remove('is-hovered');
         });
