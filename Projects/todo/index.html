@@ -1,26 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <title>Todo App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gokulraj A S | Todo</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div class="app">
-        <h1>Todo App</h1>
+    <!-- Navigation bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <a href="https://goku-devil.github.io/" class="logo"><span>Goku</span>lraj<span>.</span></a>
 
-        <div class="input-group">
-            <input type="text" id="taskInput" placeholder="Enter task..." />
-            <button onclick="addTask()">Add</button>
+            <ul id="navMenu" class="nav-links">
+                <li><a href="https://goku-devil.github.io/" class="nav-link active">Home</a></li>
+                <li><a href="https://goku-devil.github.io/#projects" class="nav-link">Projects</a></li>
+                <li><a href="https://goku-devil.github.io/#about" class="nav-link">About</a></li>
+                <li><a href="https://goku-devil.github.io/#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button id="theme-toggle" type="button" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <button id="hamburger" class="hamburger" type="button" aria-label="Open navigation menu" aria-controls="navMenu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </div>
+    </nav>
 
-        <ul id="taskList"></ul>
-    </div>
+    <!-- todo app -->
+    <main class="todo-wrapper" id="home">
+        <section class="todo-card" id="todo">
+            <h2>My Task List</h2>
+            <p class="subtitle">Plan your day and keep moving.</p>
+
+            <div class="input-row">
+                <input id="taskInput" type="text" placeholder="Add a new task..." aria-label="Task input">
+                <button id="addTaskBtn" onclick="addTask()">Add</button>
+            </div>
+
+            <ul id="taskList" aria-label="Todo items"></ul>
+        </section>
+    </main>
+
+    <footer class="site-footer" aria-label="Footer">
+        <p>Made by Gokulraj A S | Todo Project</p>
+    </footer>
 
     <script src="script.js"></script>
+    
 </body>
-
 </html>
