@@ -82,5 +82,120 @@ function initializeNavbar() {
 	});
 }
 
+function initializeCalculator() {
+	const display = document.getElementById("calcDisplay");
+	const buttons = document.querySelectorAll(".calc-btn");
+	if (!display || buttons.length === 0) return;
+
+	const OPERATORS = ["+", "-", "*", "/", "%"];
+	let expression = "0";
+
+	const updateDisplay = () => {
+		display.value = expression;
+	};
+
+	const appendValue = (value) => {
+		if (expression === "0" && value !== ".") {
+			expression = value;
+			return;
+		}
+
+		const lastChar = expression[expression.length - 1];
+
+		if (value === ".") {
+			const tokens = expression.split(/[+\-*/%]/);
+			const currentToken = tokens[tokens.length - 1];
+			if (currentToken.includes(".")) return;
+		}
+
+		if (OPERATORS.includes(value) && OPERATORS.includes(lastChar)) {
+			expression = expression.slice(0, -1) + value;
+			return;
+		}
+
+		expression += value;
+	};
+
+	const clearAll = () => {
+		expression = "0";
+	};
+
+	const deleteLast = () => {
+		if (expression.length <= 1) {
+			expression = "0";
+			return;
+		}
+		expression = expression.slice(0, -1);
+	};
+
+	const evaluateExpression = () => {
+		try {
+			const sanitized = expression.replace(/%/g, "/100");
+			const result = Function(`"use strict"; return (${sanitized})`)();
+
+			if (!Number.isFinite(result)) {
+				expression = "Error";
+				return;
+			}
+
+			expression = Number(result.toFixed(10)).toString();
+		} catch {
+			expression = "Error";
+		}
+	};
+
+	buttons.forEach((button) => {
+		button.addEventListener("click", () => {
+			const action = button.dataset.action;
+			const value = button.dataset.value;
+
+			if (expression === "Error" && action !== "clear") {
+				expression = "0";
+			}
+
+			if (action === "clear") {
+				clearAll();
+			} else if (action === "delete") {
+				deleteLast();
+			} else if (action === "equals") {
+				evaluateExpression();
+			} else if (value) {
+				appendValue(value);
+			}
+
+			updateDisplay();
+		});
+	});
+
+	window.addEventListener("keydown", (event) => {
+		const allowedKeys = [...OPERATORS, ".", ..."0123456789"];
+		if (allowedKeys.includes(event.key)) {
+			if (expression === "Error") expression = "0";
+			appendValue(event.key);
+			updateDisplay();
+			return;
+		}
+
+		if (event.key === "Enter") {
+			event.preventDefault();
+			evaluateExpression();
+			updateDisplay();
+		}
+
+		if (event.key === "Backspace") {
+			deleteLast();
+			updateDisplay();
+		}
+
+		if (event.key === "Escape") {
+			clearAll();
+			updateDisplay();
+		}
+	});
+
+	updateDisplay();
+}
+
 initializeTheme();
 initializeNavbar();
+initializeCalculator();

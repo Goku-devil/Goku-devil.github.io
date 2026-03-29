@@ -206,6 +206,70 @@ body{
 	color: var(--secondary-text);
 }
 
+.calculator-app {
+	margin-top: 18px;
+}
+
+.calc-display {
+	width: 100%;
+	height: 70px;
+	border: 2px solid color-mix(in srgb, var(--panel-border) 45%, transparent);
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--task-bg) 92%, transparent);
+	color: var(--primary-text);
+	font-family: "Courier New", Courier, monospace;
+	font-size: 2rem;
+	text-align: right;
+	padding: 0 14px;
+	margin-bottom: 12px;
+}
+
+.calc-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 10px;
+}
+
+.calc-btn {
+	border: 0;
+	border-radius: 10px;
+	height: 52px;
+	font-size: 1.1rem;
+	font-weight: 700;
+	color: var(--primary-text);
+	background: color-mix(in srgb, var(--task-bg) 90%, transparent);
+	border: 1px solid color-mix(in srgb, var(--panel-border) 35%, transparent);
+	cursor: pointer;
+	transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.calc-btn:hover {
+	transform: translateY(-1px);
+	filter: brightness(1.04);
+}
+
+.calc-btn:focus-visible {
+	outline: 2px solid var(--brand);
+	outline-offset: 2px;
+}
+
+.calc-btn.operator {
+	background: color-mix(in srgb, var(--brand) 18%, var(--task-bg));
+}
+
+.calc-btn.action {
+	background: color-mix(in srgb, #f39c12 18%, var(--task-bg));
+}
+
+.calc-btn.equals {
+	background: var(--brand);
+	color: #ffffff;
+}
+
+.calc-btn.zero {
+	grid-column: span 2;
+}
+
 .site-footer {
 	min-height: var(--footer-height);
 	border-top: 1px solid color-mix(in srgb, var(--panel-border) 30%, transparent);
@@ -271,5 +335,14 @@ body{
 
 	.app-card h2{
 		font-size: 1.65rem;
+	}
+
+	.calc-display {
+		height: 62px;
+		font-size: 1.7rem;
+	}
+
+	.calc-btn {
+		height: 48px;
 	}
 }

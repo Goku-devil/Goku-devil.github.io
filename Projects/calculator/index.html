@@ -44,6 +44,36 @@
 		<section class="app-card" id="calculator">
 			<h2>Calculator</h2>
 			<p>This page now uses the same navbar and footer style as your Todo page.</p>
+
+			<div class="calculator-app" aria-label="Calculator app">
+				<input id="calcDisplay" class="calc-display" type="text" value="0" readonly aria-label="Calculator display">
+
+				<div class="calc-grid">
+					<button type="button" class="calc-btn action" data-action="clear">AC</button>
+					<button type="button" class="calc-btn action" data-action="delete">DEL</button>
+					<button type="button" class="calc-btn operator" data-value="%">%</button>
+					<button type="button" class="calc-btn operator" data-value="/">/</button>
+
+					<button type="button" class="calc-btn" data-value="7">7</button>
+					<button type="button" class="calc-btn" data-value="8">8</button>
+					<button type="button" class="calc-btn" data-value="9">9</button>
+					<button type="button" class="calc-btn operator" data-value="*">*</button>
+
+					<button type="button" class="calc-btn" data-value="4">4</button>
+					<button type="button" class="calc-btn" data-value="5">5</button>
+					<button type="button" class="calc-btn" data-value="6">6</button>
+					<button type="button" class="calc-btn operator" data-value="-">-</button>
+
+					<button type="button" class="calc-btn" data-value="1">1</button>
+					<button type="button" class="calc-btn" data-value="2">2</button>
+					<button type="button" class="calc-btn" data-value="3">3</button>
+					<button type="button" class="calc-btn operator" data-value="+">+</button>
+
+					<button type="button" class="calc-btn zero" data-value="0">0</button>
+					<button type="button" class="calc-btn" data-value=".">.</button>
+					<button type="button" class="calc-btn equals" data-action="equals">=</button>
+				</div>
+			</div>
 		</section>
 	</main>
 
