@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,8 +42,55 @@
 
 	<main class="app-wrapper" id="home">
 		<section class="app-card" id="weather">
-			<h2>Weather</h2>
-			<p>This page now uses the same navbar and footer style as your Todo page.</p>
+			<header class="weather-header">
+				<h2>Weather Dashboard</h2>
+				<p>Search any city to see live weather conditions.</p>
+			</header>
+
+			<form id="weatherForm" class="weather-form" autocomplete="off">
+				<label for="cityInput" class="sr-only">City name</label>
+				<div class="input-row">
+					<input id="cityInput" name="city" type="text" placeholder="Enter city name (e.g. Chennai)" required>
+					<button type="submit" id="searchBtn">
+						<i class="fa-solid fa-magnifying-glass"></i>
+						<span>Search</span>
+					</button>
+				</div>
+			</form>
+
+			<p id="statusMessage" class="status-message" aria-live="polite"></p>
+
+			<article id="weatherResult" class="weather-result" hidden>
+				<div class="result-main">
+					<div>
+						<h3 id="cityName">--</h3>
+						<p id="weatherDescription">--</p>
+					</div>
+					<div class="temp-wrap">
+						<p id="temperature">--</p>
+						<p id="feelsLike">Feels like --</p>
+					</div>
+				</div>
+
+				<div class="weather-metrics">
+					<div class="metric-card">
+						<p>Humidity</p>
+						<strong id="humidity">--</strong>
+					</div>
+					<div class="metric-card">
+						<p>Wind</p>
+						<strong id="windSpeed">--</strong>
+					</div>
+					<div class="metric-card">
+						<p>Pressure</p>
+						<strong id="pressure">--</strong>
+					</div>
+					<div class="metric-card">
+						<p>Updated</p>
+						<strong id="updatedAt">--</strong>
+					</div>
+				</div>
+			</article>
 		</section>
 	</main>
 

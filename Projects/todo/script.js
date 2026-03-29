@@ -15,7 +15,7 @@ function applyTheme(theme) {
 
 function initializeTheme() {
     const savedTheme = localStorage.getItem(THEME_KEY);
-    const preferredTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
+    const preferredTheme = savedTheme === "dark" || savedTheme === "light" ? savedTheme : "dark";
     applyTheme(preferredTheme);
 
     const toggleButton = document.getElementById("theme-toggle");
