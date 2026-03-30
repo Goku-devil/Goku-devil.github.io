@@ -1,0 +1,3 @@
+[submodule "Projects/Projects/music-player"]
+	path = Projects/Projects/music-player
+	url = https://github.com/Goku-devil/Soptify-Clone
