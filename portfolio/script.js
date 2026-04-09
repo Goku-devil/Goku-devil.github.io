@@ -336,21 +336,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalParent = terminalWrapper.parentElement;
 
             const closeTerminal = (e) => {
-                if (e) e.stopPropagation();
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
                 terminalWrapper.classList.remove('visible-on-mobile');
                 // Return it back to the original layout flexbox tree
                 setTimeout(() => {
                     if (!terminalWrapper.classList.contains('visible-on-mobile')) {
                         originalParent.appendChild(terminalWrapper);
                     }
-                }, 400);
+                }, 300);
             };
 
-            mobileTerminalBtn.addEventListener('click', () => {
+            mobileTerminalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
                 // Break out of all CSS stacking contexts by appending to body
                 document.body.appendChild(terminalWrapper);
-                terminalWrapper.classList.add('visible-on-mobile');
-                setTimeout(() => terminalInput.focus(), 100);
+                
+                // Ensure DOM update before triggering CSS transitions
+                requestAnimationFrame(() => {
+                    terminalWrapper.classList.add('visible-on-mobile');
+                    setTimeout(() => {
+                        if (terminalInput) terminalInput.focus();
+                    }, 50);
+                });
             });
 
             // Close when clicking the red dot in the terminal header
@@ -404,5 +416,37 @@ document.addEventListener('DOMContentLoaded', () => {
             card.classList.remove('is-hovered');
         });
     });
+
+    /* =========================================
+       HERO BACKGROUND INTERACTIVITY
+       ========================================= */
+    const heroSection = document.getElementById('hero');
+    const heroBg = document.querySelector('.hero-bg-animated');
+
+    if (heroSection && heroBg) {
+        heroSection.addEventListener('mousemove', (e) => {
+            const rect = heroSection.getBoundingClientRect();
+            
+            // Normalize cursor coordinates from -1 to 1 based on section center
+            const x = (e.clientX - rect.left) / rect.width - 0.5;
+            const y = (e.clientY - rect.top) / rect.height - 0.5;
+            
+            // 3D rotation logic (up to 15 degrees)
+            const rotateX = -y * 30; // Tilt based on vertical axis
+            const rotateY = x * 30;  // Tilt based on horizontal axis
+
+            // Mild translation
+            const moveX = x * -20;
+            const moveY = y * -20;
+
+            heroBg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${moveX}px, ${moveY}px)`;
+        });
+        
+        // Reset tilt on mouse leave
+        heroSection.addEventListener('mouseleave', () => {
+            // Restore to flat
+            heroBg.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translate(0px, 0px)`;
+        });
+    }
 
 });
