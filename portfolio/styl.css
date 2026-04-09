@@ -912,13 +912,31 @@ footer p {
 
 .reveal {
     opacity: 0;
-    transform: translateY(50px);
+    --reveal-translate-x: 0;
+    --reveal-translate-y: 50px;
+    --reveal-scale: 1;
+    transform: translate(var(--reveal-translate-x), var(--reveal-translate-y)) scale(var(--reveal-scale));
     transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(0, 0) scale(1);
+}
+
+.reveal.fade-left {
+    --reveal-translate-x: -50px;
+    --reveal-translate-y: 0;
+}
+
+.reveal.fade-right {
+    --reveal-translate-x: 50px;
+    --reveal-translate-y: 0;
+}
+
+.reveal.scale-up {
+    --reveal-scale: 0.8;
+    --reveal-translate-y: 20px;
 }
 
 /* =========================================

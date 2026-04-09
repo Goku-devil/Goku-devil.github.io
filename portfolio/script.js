@@ -105,10 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const revealOnScroll = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
+        const intersecting = entries.filter(entry => entry.isIntersecting);
+        intersecting.forEach((entry, index) => {
+            setTimeout(() => {
+                entry.target.classList.add('active');
+            }, index * 150); // Stagger effect
 
-            entry.target.classList.add('active');
             // Stop observing once revealed
             observer.unobserve(entry.target);
         });
