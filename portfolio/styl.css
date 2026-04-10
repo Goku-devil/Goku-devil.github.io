@@ -695,25 +695,124 @@ img {
     margin-bottom: 1.5rem;
 }
 
-.about-stats {
+/* Linux Expertise Card (Replaces about-stats) */
+.about-linux-skills {
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px var(--shadow-color);
 }
 
-.stat h3 {
-    font-size: 3rem;
-    color: var(--accent-1);
-    margin-bottom: 0.2rem;
+.about-linux-skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-gradient);
 }
 
-.stat p {
-    font-size: 1rem;
-    font-weight: 600;
+.linux-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.linux-header .linux-icon {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+}
+
+.linux-header h3 {
+    font-size: 1.5rem;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    color: var(--text-primary);
+}
+
+.linux-skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.linux-skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.skill-info i {
+    margin-right: 0.5rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.skill-pct {
+    color: var(--accent-1);
+    font-family: monospace;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--primary-gradient);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: width 1s ease-out;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmerBar 2s infinite linear;
+}
+
+@keyframes shimmerBar {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.linux-skill-item:hover .skill-progress {
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+}
+
+.linux-skill-item:hover .skill-info i {
+    color: var(--accent-1);
+    transform: scale(1.1);
 }
 
 /* =========================================
@@ -939,17 +1038,17 @@ img {
     align-items: center;
 }
 
-.social-links {
-    margin-top: 4rem;
+.footer-socials {
+    margin-top: 1.5rem;
     display: flex;
-    gap: 2rem;
+    gap: 1.2rem;
 }
 
-.social-links a {
+.footer-socials a {
     color: var(--text-secondary);
-    font-size: 1.5rem;
-    width: 50px;
-    height: 50px;
+    font-size: 1.1rem;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -959,28 +1058,145 @@ img {
     border: 1px solid var(--border-color);
 }
 
-.social-links a:hover {
+.footer-socials a:hover {
     color: var(--bg-color) !important;
     background: var(--accent-1);
-    transform: translateY(-5px) scale(1.1);
+    transform: translateY(-4px) scale(1.1);
     border-color: var(--accent-1);
-    box-shadow: 0 12px 25px var(--shadow-color);
+    box-shadow: 0 10px 20px rgba(74, 222, 128, 0.2);
 }
 
 /* =========================================
    FOOTER
    ========================================= */
-footer {
-    text-align: center;
-    padding: 2rem 0;
+.footer {
+    position: relative;
+    padding: 5rem 0 2rem 0;
+    margin-top: 5rem;
+    background: var(--surface-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--border-color);
-    background: var(--surface-solid);
 }
 
-footer p {
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-1));
+    background-size: 200% auto;
+    opacity: 0.8;
+    animation: shimmerBorder 4s linear infinite;
+}
+
+@keyframes shimmerBorder {
+    100% { background-position: 200% center; }
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 3rem;
+    margin-bottom: 2rem;
+}
+
+.footer-brand .footer-logo {
+    display: inline-block;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    transition: var(--transition);
+}
+
+.footer-brand .footer-logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 15px rgba(39, 201, 63, 0.4);
+}
+
+.footer-tagline {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 320px;
+    line-height: 1.6;
+    margin: 0;
+    transition: var(--transition);
+}
+
+.footer-brand:hover .footer-tagline {
+    color: var(--text-primary);
+}
+
+.footer-credits {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer-credits .credit-item {
+    margin: 0 0 0.8rem 0;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
+    cursor: default;
+}
+
+.footer-credits .credit-item:hover {
+    transform: translateX(-8px);
+    color: var(--text-primary);
+}
+
+.footer-credits .credit-item:hover .text-highlight {
+    filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.5));
+}
+
+.footer-credits .credit-item:last-child {
+    margin-bottom: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.footer-bottom p {
     margin: 0;
     font-size: 0.9rem;
-    font-family: monospace;
+    color: var(--text-secondary);
+    opacity: 0.8;
+    transition: var(--transition);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.footer-bottom p:hover {
+    opacity: 1;
+    color: var(--accent-1);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .footer-grid {
+        flex-direction: column;
+        text-align: center;
+        gap: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
+    
+    .footer-credits {
+        align-items: center;
+    }
+
+    .footer-credits .credit-item:hover {
+        transform: translateY(-3px);
+    }
+    
+    .footer-brand .footer-tagline {
+        margin: 0 auto;
+    }
 }
 
 /* =========================================
