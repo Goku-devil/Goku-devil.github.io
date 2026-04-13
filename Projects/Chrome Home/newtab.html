@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<!-- Version 2.1.0 -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home</title>
+	<link rel="icon" href="./asserts/icons8-home-48.png" type="image/png">
+	<link rel="shortcut icon" href="./asserts/icons8-home-48.png" type="image/x-icon">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="scene-3d" aria-hidden="true">
+		<div class="float-orb orb-a"></div>
+		<div class="float-orb orb-b"></div>
+		<div class="float-orb orb-c"></div>
+		<div class="tilt-card card-a"></div>
+		<div class="tilt-card card-b"></div>
+	</div>
+	<div class="bg-overlay"></div>
+
+	<main class="home-shell">
+		<section class="hero">
+			<div class="hero-head">
+				<div>
+					<p class="kicker">Chrome Home</p>
+					<h1 class="headline">Start Focused</h1>
+					<p class="subtext">Search with Google or jump to your shortcuts.</p>
+				</div>
+				<div class="time-and-quote">
+					<div class="time-pill" aria-label="Date and Time">
+						<div id="clock" class="clock">--:--</div>
+						<div id="date" class="date">Loading date...</div>
+					</div>
+
+					<div class="hero-quotes" aria-label="Tech Quotes">
+						<div class="quotes-head">
+							<h2>Tech Quotes</h2>
+						</div>
+						<div id="quotes-list" class="quotes-list" aria-live="polite"></div>
+					</div>
+				</div>
+			</div>
+
+				<form id="search-form" class="search" action="https://www.google.com/search" method="GET" autocomplete="off" role="search">
+					<div class="search-stack">
+						<div class="google-box">
+							<input id="search-input" type="text" name="q" placeholder="Search with Google or type a URL" aria-autocomplete="list" aria-expanded="false" aria-controls="search-suggestions">
+						</div>
+						<div id="search-suggestions" class="search-suggestions" hidden role="listbox" aria-label="Google suggestions"></div>
+					</div>
+			</form>
+
+		</section>
+
+		<section class="links-card" aria-label="Quick Links">
+			<div class="links-head">
+				<h2>Shortcuts</h2>
+			</div>
+			<div id="shortcuts-grid" class="shortcuts-grid" aria-live="polite"></div>
+		</section>
+
+		<section id="tasks-section" class="tasks-card" aria-label="Daily checklist" hidden>
+			<div class="tasks-head">
+				<div>
+					<p class="kicker">Daily Checklist</p>
+					<h2>Task Manager</h2>
+				</div>
+				<div id="task-count" class="task-count" aria-live="polite">0 open</div>
+			</div>
+			<form id="task-form" class="task-form">
+				<input id="task-input" class="task-input" type="text" maxlength="120" placeholder="Add a task you want to finish today" aria-label="New task">
+				<button type="submit" class="primary-btn">Add Task</button>
+			</form>
+			<ul id="task-list" class="task-list" aria-live="polite"></ul>
+			<div class="task-footer">
+				<p class="task-note">Keep the important work visible from the moment the tab opens.</p>
+				<div class="shortcut-actions">
+					<button id="task-clear-all" type="button" class="ghost-btn">Clear all</button>
+					<button id="task-clear-completed" type="button" class="ghost-btn">Clear completed</button>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<div id="shortcut-modal" class="shortcut-modal" hidden>
+		<div class="shortcut-dialog" role="dialog" aria-modal="true" aria-label="Add shortcut">
+			<h3 id="shortcut-modal-title">Add Shortcut</h3>
+			<form id="shortcut-form" class="shortcut-form">
+				<input id="shortcut-name" type="text" maxlength="28" placeholder="Name" required>
+				<input id="shortcut-url" type="text" placeholder="https://example.com" required>
+				<div class="shortcut-actions">
+					<button type="button" id="shortcut-cancel" class="ghost-btn">Cancel</button>
+					<button type="submit" id="shortcut-submit" class="primary-btn">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="task-warning-modal" class="task-warning-modal" hidden>
+		<div class="task-warning-dialog" role="dialog" aria-modal="true" aria-label="Pending tasks warning">
+			<h3>Pending Tasks</h3>
+			<p id="task-warning-message" class="task-warning-message">You still have incomplete tasks.</p>
+			<div class="shortcut-actions">
+				<button id="task-warning-dismiss" type="button" class="primary-btn">Review tasks</button>
+			</div>
+		</div>
+	</div>
+
+	<button id="quick-add-task-btn" class="quick-add-task-btn" type="button" hidden>Add Task</button>
+
+	<div id="quick-task-modal" class="quick-task-modal" hidden>
+		<div class="quick-task-dialog" role="dialog" aria-modal="true" aria-label="Quick add task">
+			<h3>Add Task</h3>
+			<form id="quick-task-form" class="shortcut-form">
+				<input id="quick-task-input" type="text" maxlength="120" placeholder="Type your task" required>
+				<div class="shortcut-actions">
+					<button id="quick-task-cancel" type="button" class="ghost-btn">Cancel</button>
+					<button type="submit" class="primary-btn">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<button id="customize-btn" class="customize-btn" type="button">Customize</button>
+
+	<div id="customize-modal" class="customize-modal" hidden>
+		<div class="customize-dialog" role="dialog" aria-modal="true" aria-label="Customize theme">
+			<h3>Customize</h3>
+			<div class="customize-group">
+				<label for="theme-select">Theme</label>
+				<select id="theme-select">
+					<option value="ocean">Ocean</option>
+					<option value="emerald">Emerald</option>
+					<option value="sunset">Sunset</option>
+					<option value="mono">Mono</option>
+				</select>
+			</div>
+			<div class="customize-group">
+				<div class="switch-row">
+					<div>
+						<label for="terminal-mode-toggle">Command-line aesthetic</label>
+						<p class="switch-help">Swap the page into a dark monospace workspace.</p>
+					</div>
+					<label class="toggle-switch" for="terminal-mode-toggle">
+						<input id="terminal-mode-toggle" type="checkbox">
+						<span class="toggle-track" aria-hidden="true">
+							<span class="toggle-thumb"></span>
+						</span>
+					</label>
+				</div>
+			</div>
+			<div class="customize-group">
+				<label>Main Page Template</label>
+				<div class="layout-grid" id="layout-grid">
+					<button type="button" class="layout-chip" data-layout="centered">Centered</button>
+					<button type="button" class="layout-chip" data-layout="wide">Wide</button>
+					<button type="button" class="layout-chip" data-layout="minimal">Minimal</button>
+				</div>
+			</div>
+			<div class="customize-group">
+				<label>Background Template</label>
+				<div class="template-grid" id="template-grid">
+					<button type="button" class="template-chip" data-template="aurora">
+						<span class="chip-swatch swatch-aurora"></span>
+						<span>Aurora</span>
+					</button>
+					<button type="button" class="template-chip" data-template="prism">
+						<span class="chip-swatch swatch-prism"></span>
+						<span>Prism</span>
+					</button>
+					<button type="button" class="template-chip" data-template="dark-wave">
+						<span class="chip-swatch swatch-darkwave"></span>
+						<span>Dark Wave</span>
+					</button>
+					<button type="button" class="template-chip" data-template="neon-grid">
+						<span class="chip-swatch swatch-neon"></span>
+						<span>Neon Grid</span>
+					</button>
+					<button type="button" class="template-chip" data-template="sunrise">
+						<span class="chip-swatch swatch-sunrise"></span>
+						<span>Sunrise</span>
+					</button>
+					<button type="button" class="template-chip" data-template="midnight">
+						<span class="chip-swatch swatch-midnight"></span>
+						<span>Midnight</span>
+					</button>
+					<button type="button" class="template-chip" data-template="fluid-flow">
+						<span class="chip-swatch swatch-fluid"></span>
+						<span>Fluid Flow</span>
+					</button>
+					<button type="button" class="template-chip" data-template="pulse-ring">
+						<span class="chip-swatch swatch-pulse"></span>
+						<span>Pulse Ring</span>
+					</button>
+					<button type="button" class="template-chip" data-template="spiral-orbit">
+						<span class="chip-swatch swatch-spiral"></span>
+						<span>Spiral Orbit</span>
+					</button>
+					<button type="button" class="template-chip" data-template="bouncing-bg">
+						<span class="chip-swatch swatch-bouncing"></span>
+						<span>Bouncing BG</span>
+					</button>
+					<button type="button" class="template-chip" data-template="custom">
+						<span class="chip-swatch swatch-custom"></span>
+						<span>Custom</span>
+					</button>
+				</div>
+			</div>
+			<div class="customize-group custom-template-controls" id="custom-template-controls">
+				<label>Custom Template</label>
+				<div class="custom-template-grid">
+					<div class="custom-color-field">
+						<span>Primary</span>
+						<input id="custom-primary" type="color" value="#4cc9f0">
+					</div>
+					<div class="custom-color-field">
+						<span>Secondary</span>
+						<input id="custom-secondary" type="color" value="#3a86ff">
+					</div>
+					<div class="custom-color-field">
+						<span>Glow</span>
+						<input id="custom-glow" type="color" value="#ffffff">
+					</div>
+				</div>
+				<div class="custom-speed-row">
+					<label for="custom-speed">Motion Speed</label>
+					<input id="custom-speed" type="range" min="6" max="16" value="8">
+				</div>
+			</div>
+			<div class="customize-group">
+				<label for="bg-upload">Background Image</label>
+				<input id="bg-upload" type="file" accept="image/*">
+			</div>
+			<div class="shortcut-actions">
+				<button type="button" id="customize-reset" class="ghost-btn">Reset</button>
+				<button type="button" id="customize-close" class="primary-btn">Done</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>

@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             themeIcon.classList.replace('fa-sun', 'fa-moon');
         }
+        
+        // Dispatch custom event to notify JS components like the 3D Cube
+        document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
     };
 
     // Apply initial theme
@@ -449,4 +452,170 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* =========================================
+       THREE.JS RUBIK'S CUBE (INTERACTIVE)
+       ========================================= */
+    const container = document.getElementById('three-cube-container');
+    if (container && window.THREE) {
+        const scene = new THREE.Scene();
+        
+        // Setup Camera
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 8;
+        
+        // Setup Renderer
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+        
+        // Group holds 27 small cubes to form a Rubik's shape
+        const rubiksGroup = new THREE.Group();
+        
+        const boxSize = 0.96; // slightly less to create matrix gaps
+        const offset = 1;
+        const geometry = new THREE.BoxGeometry(boxSize, boxSize, boxSize);
+        
+        // Dynamic Glass Material
+        const material = new THREE.MeshPhysicalMaterial({
+            color: document.documentElement.getAttribute('data-theme') === 'light' ? 0xf8fafc : 0x0f172a,
+            metalness: 0.2,
+            roughness: 0.2,
+            clearcoat: 1.0,
+            transparent: true,
+            opacity: 0.95
+        });
+        
+        // Dynamic Wireframes
+        const edgesMaterial = new THREE.LineBasicMaterial({ 
+            color: document.documentElement.getAttribute('data-theme') === 'light' ? 0x1e293b : 0x27c93f, 
+            transparent: true, 
+            opacity: 0.8 
+        });
+        
+        // Listen for Theme Toggle to swap colors live
+        document.addEventListener('themeChanged', (e) => {
+            if(e.detail.theme === 'light') {
+                material.color.setHex(0xf8fafc);
+                edgesMaterial.color.setHex(0x1e293b);
+            } else {
+                material.color.setHex(0x0f172a);
+                edgesMaterial.color.setHex(0x27c93f);
+            }
+        });
+        
+        for(let x = -1; x <= 1; x++) {
+            for(let y = -1; y <= 1; y++) {
+                for(let z = -1; z <= 1; z++) {
+                    const cubeMesh = new THREE.Mesh(geometry, material);
+                    cubeMesh.position.set(x * offset, y * offset, z * offset);
+                    
+                    const edges = new THREE.EdgesGeometry(geometry);
+                    const line = new THREE.LineSegments(edges, edgesMaterial);
+                    cubeMesh.add(line);
+                    
+                    rubiksGroup.add(cubeMesh);
+                }
+            }
+        }
+        
+        scene.add(rubiksGroup);
+        
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+        dirLight.position.set(5, 5, 5);
+        scene.add(dirLight);
+        
+        // Interaction Logic / Physics
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+        let velocity = { x: 0.005, y: 0.01 };
+        let autoRotate = true;
+        let dragTimeout;
+        
+        // Initial Orientation
+        rubiksGroup.rotation.x = Math.PI / 6;
+        rubiksGroup.rotation.y = Math.PI / 4;
+        
+        const dragStart = (e) => {
+            isDragging = true;
+            autoRotate = false;
+            clearTimeout(dragTimeout);
+            const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            previousMousePosition = { x: clientX, y: clientY };
+            velocity = { x: 0, y: 0 };
+        };
+        
+        const applyRotation = (dx, dy) => {
+            // Apply mouse drag as quaternion rotation relative to unrotated world axes
+            const quaternionY = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), dx);
+            const quaternionX = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), dy);
+            
+            rubiksGroup.quaternion.premultiply(quaternionY);
+            rubiksGroup.quaternion.premultiply(quaternionX);
+        };
+        
+        const drag = (e) => {
+            if (!isDragging) return;
+            if(e.cancelable) e.preventDefault();
+            
+            const clientX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const clientY = e.type.includes('mouse') ? e.clientY : e.touches[0].clientY;
+            
+            const deltaX = clientX - previousMousePosition.x;
+            const deltaY = clientY - previousMousePosition.y;
+            
+            velocity = { x: deltaX * 0.005, y: deltaY * 0.005 };
+            applyRotation(velocity.x, velocity.y);
+            
+            previousMousePosition = { x: clientX, y: clientY };
+        };
+        
+        const dragEnd = () => {
+            if(!isDragging) return;
+            isDragging = false;
+            dragTimeout = setTimeout(() => {
+                autoRotate = true;
+            }, 2500);
+        };
+        
+        container.addEventListener('mousedown', dragStart);
+        window.addEventListener('mousemove', drag, {passive: false});
+        window.addEventListener('mouseup', dragEnd);
+        container.addEventListener('mouseleave', dragEnd);
+        
+        container.addEventListener('touchstart', dragStart, {passive: true});
+        window.addEventListener('touchmove', drag, {passive: false});
+        window.addEventListener('touchend', dragEnd);
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            
+            if(!isDragging) {
+                applyRotation(velocity.x, velocity.y);
+                
+                velocity.x *= 0.95;
+                velocity.y *= 0.95;
+                
+                if(autoRotate) {
+                    velocity.x += (0.01 - velocity.x) * 0.05;
+                    velocity.y += (0.005 - velocity.y) * 0.05;
+                }
+            }
+            
+            renderer.render(scene, camera);
+        };
+        animate();
+        
+        window.addEventListener('resize', () => {
+            if(camera && renderer && container) {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        });
+    }
 });
