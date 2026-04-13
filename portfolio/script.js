@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================
+       CLI MODE RESTORATION (PERSISTENT)
+       ========================================= */
+    const savedCliMode = localStorage.getItem('cli-mode');
+    if (savedCliMode === 'true') {
+        document.documentElement.setAttribute('data-cli-mode', 'true');
+    }
+
+    /* =========================================
        THEME TOGGLE (LIGHT / DARK MODE)
        ========================================= */
     const themeToggleBtn = document.getElementById('theme-toggle');
@@ -247,7 +255,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             switch (command) {
                 case 'help':
-                    response = "Available: <br>ls &nbsp;&nbsp;&nbsp;&nbsp;- list directory contents<br>cd &nbsp;&nbsp;&nbsp;&nbsp;- change directory<br>cat &nbsp;&nbsp;&nbsp;- print file contents<br>clear &nbsp;- clear terminal output<br>whoami - print current user<br>about &nbsp;- print developer info<br>distros - list favorite linux distros";
+                    response = "<span class='help-title'>Available Commands</span>"
+                        + "<span class='help-line'><span class='help-cmd'>ls</span><span class='help-desc'>list directory contents</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>cd</span><span class='help-desc'>change directory</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>cat</span><span class='help-desc'>print file contents</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>clear</span><span class='help-desc'>clear terminal output</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>whoami</span><span class='help-desc'>print current user</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>about</span><span class='help-desc'>print developer info</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>distros</span><span class='help-desc'>list favorite linux distros</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>mode -cli</span><span class='help-desc'>enable CLI theme</span></span>"
+                        + "<span class='help-line'><span class='help-cmd'>mode -def</span><span class='help-desc'>switch back to default theme</span></span>";
                     break;
                 case 'distros':
                     response = "- Kali Linux<br>- Ubuntu<br>- Garuda Linux<br>- Zorin OS<br>- Pop!_OS";
@@ -318,6 +335,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 case 'echo':
                     response = args.slice(1).join(' ');
+                    break;
+                case 'mode':
+                    const modeFlag = args[1];
+                    if (!modeFlag) {
+                        response = `<span class="error">mode: missing flag | usage: mode -cli or mode -def</span>`;
+                    } else if (modeFlag === '-cli') {
+                        document.documentElement.setAttribute('data-cli-mode', 'true');
+                        response = `<span class="highlight">CLI Mode Enabled</span>  >=>  Welcome to the Matrix Neo! 🟢`;
+                        localStorage.setItem('cli-mode', 'true');
+                    } else if (modeFlag === '-def') {
+                        document.documentElement.setAttribute('data-cli-mode', 'false');
+                        response = `<span class="highlight">CLI Mode Disabled</span>  <=  Back to the normal world`;
+                        localStorage.setItem('cli-mode', 'false');
+                    } else {
+                        response = `<span class="error">mode: invalid flag '${modeFlag}' | usage: mode -cli or mode -def</span>`;
+                    }
                     break;
                 default:
                     response = `<span class="error">${command}: command not found</span>`;

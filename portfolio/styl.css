@@ -521,6 +521,7 @@ img {
     flex: 1;
     min-width: 0;
     max-width: 600px;
+    width: 100%;
 }
 
 .hero-image {
@@ -539,10 +540,12 @@ img {
 }
 
 .name {
-    font-size: clamp(40px, 8vw, 80px);
-    margin-bottom: 0px;
+    font-size: clamp(36px, 7vw, 72px);
+    margin-bottom: 0.5rem;
     color: var(--text-primary);
-    display: inline-block;
+    display: block;
+    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .text-highlight {
@@ -558,13 +561,16 @@ img {
     font-size: clamp(30px, 5vw, 60px);
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
-    white-space: nowrap;
+    white-space: normal;
+    min-height: auto;
+    line-height: 1.3;
 }
 
 .summary {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2vw, 1.25rem);
     max-width: 540px;
     margin-bottom: 2.5rem;
+    line-height: 1.6;
 }
 
 .hero-cta {
@@ -682,6 +688,30 @@ img {
 
 .terminal-output .error {
     color: #ff5f56;
+}
+
+.terminal-output .help-title {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--accent-1);
+    font-weight: 700;
+}
+
+.terminal-output .help-line {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0.6rem;
+    align-items: baseline;
+    margin-bottom: 0.15rem;
+}
+
+.terminal-output .help-cmd {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.terminal-output .help-desc {
+    color: var(--text-secondary);
 }
 
 .terminal-input-line {
@@ -971,6 +1001,14 @@ img {
     font-family: monospace;
     font-size: 0.9rem;
     color: var(--text-secondary);
+}
+
+.project-download {
+    margin-top: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
 }
 
 /* =========================================
@@ -1291,14 +1329,26 @@ img {
     }
 
     .name {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        line-height: 1.15;
+        margin-bottom: 0.5rem;
+        white-space: nowrap;
     }
 
     .role {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         white-space: normal;
         word-break: break-word;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.3;
+    }
+
+    .greeting {
+        font-size: 0.95rem;
+    }
+
+    .summary {
+        font-size: 1rem;
     }
 
     .section {
@@ -1321,12 +1371,13 @@ img {
     font-family: monospace;
     color: #27c93f;
     /* Terminal Green */
-    font-size: 2.4rem;
+    font-size: clamp(1.1rem, 3vw, 2rem);
+    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
     .typewriter {
-        font-size: 1.5rem;
+        font-size: clamp(1rem, 2.8vw, 1.6rem);
     }
 }
 
@@ -1334,16 +1385,17 @@ img {
     display: inline-block;
     color: var(--accent-1);
     /* Dynamic Theme Accent */
-    font-size: 2.4rem;
+    font-size: clamp(1.1rem, 3vw, 2rem);
     font-weight: 600;
     vertical-align: middle;
     margin-left: 2px;
     animation: blink 1s step-end infinite;
+    white-space: nowrap;
 }
 
 @media (max-width: 768px) {
     .cursor {
-        font-size: 1.5rem;
+        font-size: clamp(1rem, 2.8vw, 1.6rem);
     }
 }
 
@@ -1416,5 +1468,215 @@ img {
     .hero-cta {
         flex-wrap: wrap;
         /* Ensure buttons don't overlap */
+    }
+}
+
+/* =========================================
+   CLI MODE THEME
+   ========================================= */
+[data-cli-mode="true"] {
+    --bg-color: #000000;
+    --surface-color: rgba(0, 20, 0, 0.9);
+    --surface-solid: #001a00;
+    --text-primary: #00ff00;
+    --text-secondary: #00cc00;
+    --border-color: rgba(0, 255, 0, 0.3);
+    --accent-1: #00ff00;
+    --accent-2: #00ff00;
+    --primary-gradient: linear-gradient(135deg, #00ff00, #00cc00);
+    --shadow-color: rgba(0, 255, 0, 0.1);
+    --glass-border: rgba(0, 255, 0, 0.2);
+    --glass-highlight: rgba(0, 255, 0, 0.1);
+}
+
+[data-cli-mode="true"] body {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.05em;
+}
+
+[data-cli-mode="true"] * {
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+[data-cli-mode="true"] h1,
+[data-cli-mode="true"] h2,
+[data-cli-mode="true"] h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+[data-cli-mode="true"] .glass-card {
+    background: rgba(0, 20, 0, 0.8);
+    border: 2px solid rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2), inset 0 0 10px rgba(0, 255, 0, 0.05);
+}
+
+[data-cli-mode="true"] .btn-primary {
+    background: rgba(0, 255, 0, 0.1);
+    border: 2px solid #00ff00;
+    color: #00ff00 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.1);
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.8);
+}
+
+[data-cli-mode="true"] .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.6), inset 0 0 20px rgba(0, 255, 0, 0.2);
+    background: rgba(0, 255, 0, 0.2);
+}
+
+[data-cli-mode="true"] .terminal {
+    background: #000000;
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.4);
+}
+
+[data-cli-mode="true"] .terminal-header {
+    background: rgba(0, 20, 0, 0.8);
+    border-bottom: 2px solid #00ff00;
+}
+
+[data-cli-mode="true"] .terminal-body {
+    background: #000000;
+}
+
+[data-cli-mode="true"] .navbar.scrolled {
+    background: rgba(0, 20, 0, 0.95);
+    border-bottom: 2px solid rgba(0, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+[data-cli-mode="true"] .section-title::after {
+    background: #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+[data-cli-mode="true"] .name {
+    font-size: clamp(28px, 5vw, 52px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+[data-cli-mode="true"] .role {
+    font-size: clamp(18px, 3.5vw, 40px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    min-height: auto;
+}
+
+[data-cli-mode="true"] .summary {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+/* CLI Mode with Light Theme */
+[data-cli-mode="true"][data-theme="light"] {
+    --bg-color: #e8f5e9;
+    --surface-color: rgba(200, 255, 200, 0.9);
+    --surface-solid: #d4edda;
+    --text-primary: #1b5e20;
+    --text-secondary: #2e7d32;
+    --border-color: rgba(27, 94, 32, 0.3);
+    --accent-1: #00a000;
+    --accent-2: #00a000;
+    --primary-gradient: linear-gradient(135deg, #00a000, #007700);
+    --shadow-color: rgba(27, 94, 32, 0.15);
+    --glass-border: rgba(0, 160, 0, 0.3);
+    --glass-highlight: rgba(0, 160, 0, 0.2);
+}
+
+[data-cli-mode="true"][data-theme="light"] * {
+    text-shadow: 0 0 8px rgba(0, 160, 0, 0.3);
+}
+
+[data-cli-mode="true"][data-theme="light"] .glass-card {
+    background: rgba(212, 237, 218, 0.95);
+    border: 2px solid rgba(0, 160, 0, 0.4);
+    box-shadow: 0 0 20px rgba(0, 160, 0, 0.15), inset 0 0 10px rgba(0, 160, 0, 0.08);
+}
+
+[data-cli-mode="true"][data-theme="light"] .btn-primary {
+    background: rgba(0, 160, 0, 0.15);
+    border: 2px solid #00a000;
+    color: #1b5e20 !important;
+    box-shadow: 0 0 15px rgba(0, 160, 0, 0.2), inset 0 0 10px rgba(0, 160, 0, 0.08);
+    text-shadow: 0 0 3px rgba(0, 160, 0, 0.4);
+}
+
+[data-cli-mode="true"][data-theme="light"] .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(0, 160, 0, 0.3), inset 0 0 20px rgba(0, 160, 0, 0.15);
+    background: rgba(0, 160, 0, 0.25);
+}
+
+[data-cli-mode="true"][data-theme="light"] .terminal {
+    background: #f1f8f6;
+    border: 3px solid #00a000;
+    box-shadow: 0 0 30px rgba(0, 160, 0, 0.25);
+}
+
+[data-cli-mode="true"][data-theme="light"] .terminal-header {
+    background: rgba(200, 255, 200, 0.95);
+    border-bottom: 2px solid #00a000;
+}
+
+[data-cli-mode="true"][data-theme="light"] .terminal-body {
+    background: #f1f8f6;
+    color: #1b5e20;
+}
+
+[data-cli-mode="true"][data-theme="light"] .terminal-body p {
+    color: #1b5e20;
+}
+
+[data-cli-mode="true"][data-theme="light"] .navbar.scrolled {
+    background: rgba(212, 237, 218, 0.95);
+    border-bottom: 2px solid rgba(0, 160, 0, 0.3);
+    box-shadow: 0 0 20px rgba(0, 160, 0, 0.15);
+}
+
+[data-cli-mode="true"][data-theme="light"] .section-title::after {
+    background: #00a000;
+    box-shadow: 0 0 10px rgba(0, 160, 0, 0.3);
+}
+
+[data-cli-mode="true"][data-theme="light"] .highlight {
+    color: #1b5e20;
+}
+
+[data-cli-mode="true"][data-theme="light"] .name {
+    font-size: clamp(28px, 5vw, 52px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+}
+
+[data-cli-mode="true"][data-theme="light"] .role {
+    font-size: clamp(18px, 3.5vw, 40px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    min-height: auto;
+}
+
+[data-cli-mode="true"][data-theme="light"] .summary {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+/* CLI Mode Typewriter Sizing */
+[data-cli-mode="true"] .typewriter {
+    font-size: clamp(0.85rem, 1.8vw, 1.3rem);
+}
+
+[data-cli-mode="true"] .cursor {
+    font-size: clamp(0.85rem, 1.8vw, 1.3rem);
+}
+
+@media (max-width: 768px) {
+    [data-cli-mode="true"] .typewriter {
+        font-size: clamp(0.8rem, 1.6vw, 1rem);
+    }
+
+    [data-cli-mode="true"] .cursor {
+        font-size: clamp(0.8rem, 1.6vw, 1rem);
     }
 }
